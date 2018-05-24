@@ -33,7 +33,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Django rest framework
     url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls')),
+    # need namespace, related to settings LOGIN_URL, LOGOUT_URL
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 
