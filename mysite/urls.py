@@ -15,11 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
+from django.conf.urls import url, include
+from rest_framework import routers
+from quickstart import views
+
+# http://www.django-rest-framework.org/tutorial/quickstart/
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
 
 urlpatterns = [
-    path('', include('polls.urls')),
+    # Django
+    path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
+    # Django rest framework
+    url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls')),
 ]
 
