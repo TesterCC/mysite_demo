@@ -17,7 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url, include
 from rest_framework import routers
+from rest_framework_swagger.views import  get_swagger_view
+
 from quickstart import views
+
+# https://marcgibbons.com/django-rest-swagger/
+schema_view = get_swagger_view(title="FSPT mysite API")
 
 # http://www.django-rest-framework.org/tutorial/quickstart/
 router = routers.DefaultRouter()
@@ -28,6 +33,8 @@ router.register(r'groups', views.GroupViewSet)
 # Additionally, we include login URLs for the browsable API.
 
 urlpatterns = [
+    # Swagger docs
+    url(r'docs/', schema_view),
     # Django
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
