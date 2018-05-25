@@ -20,15 +20,16 @@ from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
 from rest_framework_swagger.views import get_swagger_view
 
-from quickstart import views
+from quickstart.views import UserViewSet, GroupViewSet
+# from snippets.views import *
 
 # https://marcgibbons.com/django-rest-swagger/
 schema_view = get_swagger_view(title="FSPT mysite API")
 
 # http://www.django-rest-framework.org/tutorial/quickstart/
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'users', UserViewSet)
+router.register(r'groups', GroupViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -44,7 +45,9 @@ urlpatterns = [
     # Swagger UI API docs
     url(r'^docs/', schema_view),
     # DRF Built-in API docs and Generate schema with valid `request` instance
-    url(r'bi_docs/', include_docs_urls(title="mysite Built-in API", public=False))
+    url(r'bi_docs/', include_docs_urls(title="mysite Built-in API", public=False)),
+    # FBV
+    url(r'^', include('snippets.urls')),    # http://127.0.0.1:8000/snippets/1/
 ]
 
 
