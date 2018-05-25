@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url, include
 from rest_framework import routers
-from rest_framework_swagger.views import  get_swagger_view
+from rest_framework.documentation import include_docs_urls
+from rest_framework_swagger.views import get_swagger_view
 
 from quickstart import views
 
@@ -33,15 +34,17 @@ router.register(r'groups', views.GroupViewSet)
 # Additionally, we include login URLs for the browsable API.
 
 urlpatterns = [
-    # Swagger docs
-    url(r'docs/', schema_view),
-    # Django
-    path('polls/', include('polls.urls')),
-    path('admin/', admin.site.urls),
     # Django rest framework
     url(r'^', include(router.urls)),
     # need namespace, related to settings LOGIN_URL, LOGOUT_URL
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # Django
+    path('polls/', include('polls.urls')),
+    path('admin/', admin.site.urls),
+    # Swagger UI API docs
+    url(r'^docs/', schema_view),
+    # DRF Built-in API docs and Generate schema with valid `request` instance
+    url(r'bi_docs/', include_docs_urls(title="mysite Built-in API", public=False))
 ]
 
 
