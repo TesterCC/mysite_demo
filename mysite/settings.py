@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
     'quickstart',
+    'snippets.apps.SnippetsConfig',   # official guide
 ]
 
 MIDDLEWARE = [
