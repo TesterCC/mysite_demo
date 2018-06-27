@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 """mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -20,6 +22,10 @@ from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework.schemas import get_schema_view
+
+from devtest.views import current_datetime
+
+from django.views.generic import TemplateView
 
 # http://www.django-rest-framework.org/tutorial/7-schemas-and-client-libraries/
 schema_view2 = get_schema_view(title='FSPT Core API')
@@ -56,6 +62,10 @@ urlpatterns = [
     url(r'^', include('snippets.urls')),    # http://127.0.0.1:8000/snippets/1/
 
     url(r'^schema/$', schema_view2),
+
+    # Current Time Test
+    # url(r'^current_date/$', TemplateView.as_view(template_name="current_date.html"))
+    path('current_date/', current_datetime, name='current_datetime')
 ]
 
 
