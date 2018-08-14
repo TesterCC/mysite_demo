@@ -8,5 +8,6 @@ from django.shortcuts import render_to_response
 
 def current_datetime(request):
     current_date = datetime.datetime.now()
+    current_date = current_date.strftime('%Y-%m-%d %H:%M:%S')
     return render_to_response('current_date.html', locals())
 
