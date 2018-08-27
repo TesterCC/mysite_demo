@@ -23,20 +23,20 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework.schemas import get_schema_view
 
+import drf_yasg
+
 from devtest.views import current_datetime
 
 from django.views.generic import TemplateView
 
 # http://www.django-rest-framework.org/tutorial/7-schemas-and-client-libraries/
-schema_view2 = get_schema_view(title='FSPT Core API')
+schema_view = get_schema_view(title='FSPT Core API')
 # terminal test:
 # http http://127.0.0.1:8000/schema/ Accept:application/coreapi+json
 
 from quickstart.views import UserViewSet, GroupViewSet
 # from snippets.views import *
 
-# https://marcgibbons.com/django-rest-swagger/
-schema_view = get_swagger_view(title="FSPT mysite API")
 
 # http://www.django-rest-framework.org/tutorial/quickstart/
 router = routers.DefaultRouter()
@@ -51,21 +51,33 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     # need namespace, related to settings LOGIN_URL, LOGOUT_URL
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # Django
+
+    # Django 2.0 official
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
-    # Swagger UI API docs
-    url(r'^docs/', schema_view),
-    # DRF Built-in API docs and Generate schema with valid `request` instance
-    url(r'bi_docs/', include_docs_urls(title="mysite Built-in API", public=False)),
+
     # FBV
     url(r'^', include('snippets.urls')),    # http://127.0.0.1:8000/snippets/1/
 
-    url(r'^schema/$', schema_view2),
+    url(r'^schema/$', schema_view),
 
+
+]
+
+# API doc config
+urlpatterns += [
+    # Swagger UI API docs, pip install django-rest-swagger
+    # https://marcgibbons.com/django-rest-swagger/
+    url(r'^swagger-docs/', get_swagger_view(title="FSPT mysite Swagger API")),
+    # DRF Built-in API docs and Generate schema with valid `request` instance, pip install coreapi
+    url(r'^drf-docs/', include_docs_urls(title="mysite Built-in DRF API", public=False)),
+    # https://drf-yasg.readthedocs.io/en/stable/openapi.html, pip install drf-yasg
+
+]
+
+# little test interface
+urlpatterns += [
     # Current Time Test
     # url(r'^current_date/$', TemplateView.as_view(template_name="current_date.html"))
     path('current_date/', current_datetime, name='current_datetime')
 ]
-
-
