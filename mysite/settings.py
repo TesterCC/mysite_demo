@@ -246,3 +246,16 @@ SWAGGER_SETTINGS = {
 }
 
 
+# email setting config
+
+EMAIL_HOST = "smtp.exmail.qq.com"
+EMAIL_PORT = 587     # 一般smtp默认25    QQ企业邮箱要用587，而不是465
+EMAIL_HOST_USER = "xxx@xxx.com"   # Your email username, required
+EMAIL_HOST_PASSWORD = "--"  # Your email password, required
+EMAIL_USE_TLS = True    # 如果设置为True则为安全连接
+EMAIL_FROM = "测试<xxx@xxx.com>"     # Your email username, Same to EMAIL_HOST_USER
+
+# web domain setting
+WEB_DOMAIN = "xxx.com"
+
+
