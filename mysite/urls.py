@@ -25,7 +25,8 @@ from rest_framework.schemas import get_schema_view
 
 import drf_yasg
 
-from devtest.views import current_datetime
+from devtest.views import current_datetime, pay_test, pay_for_tiantai
+from course import views
 
 from django.views.generic import TemplateView
 
@@ -60,8 +61,6 @@ urlpatterns = [
     url(r'^', include('snippets.urls')),    # http://127.0.0.1:8000/snippets/1/
 
     url(r'^schema/$', schema_view),
-
-
 ]
 
 # API doc config
@@ -79,5 +78,12 @@ urlpatterns += [
 urlpatterns += [
     # Current Time Test
     # url(r'^current_date/$', TemplateView.as_view(template_name="current_date.html"))
-    path('current_date/', current_datetime, name='current_datetime')
+    path('current_date/', current_datetime, name='current_datetime'),
+    path('pay_test/', pay_test, name='pay_test'),
+    path('pay_for_tiantai/', pay_for_tiantai, name='pay_for_tiantai'),
+    # django-celery demo course
+    path('do/', views.do, name='do'),  # worker will report error
+
 ]
+
+
