@@ -16,7 +16,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf.urls import url, include
 from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
@@ -25,7 +25,7 @@ from rest_framework.schemas import get_schema_view
 
 import drf_yasg
 
-from devtest.views import current_datetime, pay_test, pay_for_tiantai
+from devtest.views import current_datetime, pay_test, list_filter
 from course import views
 
 from django.views.generic import TemplateView
@@ -80,10 +80,13 @@ urlpatterns += [
     # url(r'^current_date/$', TemplateView.as_view(template_name="current_date.html"))
     path('current_date/', current_datetime, name='current_datetime'),
     path('pay_test/', pay_test, name='pay_test'),
-    path('pay_for_tiantai/', pay_for_tiantai, name='pay_for_tiantai'),
     # django-celery demo course
     path('do/', views.do, name='do'),  # worker will report error
-
 ]
 
+# static filter path test
+# https://www.cnblogs.com/fu-yong/p/9644511.html   Django 2.0 新款URL配置详解
 
+urlpatterns += [
+    re_path('^(?P<city_cat_month>\w+)/(page-(?P<page>\d+)/)?$', list_filter)
+]

@@ -39,21 +39,9 @@ def pay_test(request):
     return redirect("https://github.com")
 
 
-def pay_for_tiantai(request):
-    """
-    /pay_for_tiantai
-    """
-
-    current_date = datetime.datetime.now()
-
-    # fake random
-    mins_list = list(range(0,60))
-    random_list = random.sample(mins_list, 15)
-
-    if current_date.minute in random_list:
-        # 1/4 B link
-        return redirect("https://spay3.swiftpass.cn/spay/merchant/scanQr?qrId=4711e1c7-abd6-4cb9-a4b0-25dcd86f8ff2")
-
-    # A link
-    return redirect("https://qrcode.meituan.com/pay/1HDEGCPhUfv")
+def list_filter(request, city_cat_month, page=""):
+    # page = page or 1
+    print(request.path)
+    print(city_cat_month)
+    return None
 
