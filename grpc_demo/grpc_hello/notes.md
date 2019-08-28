@@ -19,7 +19,7 @@
 ### grpc服务定义  helloworld_pb2_grpc.py
 
 简单看下：
-- 在grpc服务架手脚定义中，定义了gRPCStub，这是给client端使用，调用grpc服务的。
+- 在grpc服务架手脚定义中，定义了gRPCStub，这是给client端使用，让client端能调用grpc服务的。
 - 定义的服务类gRPCServicer，方法SayHello需要我们在子类中进行实现。定义的add_gRPCServicer_to_server方法，用于把实现的类和grpc API调用注册起来。
 
 这里使用的几个主要方法（类）：
@@ -29,7 +29,9 @@
 
 
 ## 3rd, write  server and client python code
+实现服务，编写server.py
 
+实现客户端，编写client.py
 
 ## REF:
 #### https://blog.csdn.net/whereismatrix/article/details/78595550
