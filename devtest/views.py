@@ -82,6 +82,32 @@ def pay_for_tiantai_v3(request):
     if op_code == "0":
         return redirect("https://www.163.com/")
 
+def pay_for_tiantai_v4(request):
+    """
+    http://127.0.0.1:8000/pay_for_tiantai_v4
+    :param request:
+    :return:
+    """
+
+    cur_path = os.getcwd()+"/devtest/"     # need change dir
+    # print(cur_path)
+    with open(cur_path+"config_link.txt", "r") as f:
+        op_code = f.read().strip()
+
+    if op_code == "1":
+
+        random_flag = random.choice((range(3)))
+        print(f'flag value --> {random_flag}')
+        if random_flag in [1, 2]:
+            # B link
+            return redirect("https://www.baidu.com")
+
+        # A link
+        return redirect("https://www.163.com/")
+
+    if op_code == "0":
+        return redirect("https://www.163.com/")
+
 
 def set_pay_test_link(request, op_code):
     """

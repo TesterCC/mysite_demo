@@ -25,7 +25,7 @@ from rest_framework.schemas import get_schema_view
 
 import drf_yasg
 
-from devtest.views import current_datetime, pay_test, list_filter, get_pay_test_link_status, pay_for_tiantai_v2, set_pay_test_link, pay_for_tiantai_v3
+from devtest.views import current_datetime, pay_test, list_filter, get_pay_test_link_status, pay_for_tiantai_v2, set_pay_test_link, pay_for_tiantai_v3, pay_for_tiantai_v4
 from course import views
 
 from django.views.generic import TemplateView
@@ -82,6 +82,7 @@ urlpatterns += [
     path('pay_test/', pay_test, name='pay_test'),
     path('pay_for_tiantai_v2/', pay_for_tiantai_v2, name='pay_for_tiantai_v2'),
     path('pay_for_tiantai_v3/', pay_for_tiantai_v3, name='pay_for_tiantai_v3'),
+    path('pay_for_tiantai_v4/', pay_for_tiantai_v4, name='pay_for_tiantai_v4'),
     path('set_pay_test_link/ablink/<str:op_code>', set_pay_test_link, name='set_pay_test_link'),
     path('get_pay_test_link_status/', get_pay_test_link_status, name='get_pay_test_link_status'),
     # django-celery demo course
