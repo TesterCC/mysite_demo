@@ -25,7 +25,9 @@ from rest_framework.schemas import get_schema_view
 
 import drf_yasg
 
-from devtest.views import current_datetime, pay_test, list_filter, get_pay_test_link_status, pay_for_tiantai_v2, set_pay_test_link, pay_for_tiantai_v3, pay_for_tiantai_v4
+from devtest.views import (verify_code_demo,current_datetime, pay_test, list_filter, get_pay_test_link_status,
+                           pay_for_tiantai_v2, set_pay_test_link, pay_for_tiantai_v3, pay_for_tiantai_v4, pay_for_tiantai_v5,
+                           get_check_code_image)
 from course import views
 
 from django.views.generic import TemplateView
@@ -79,10 +81,13 @@ urlpatterns += [
     # Current Time Test
     # url(r'^current_date/$', TemplateView.as_view(template_name="current_date.html"))
     path('current_date/', current_datetime, name='current_datetime'),
-    path('pay_test/', pay_test, name='pay_test'),
+    path('verify_code_demo/', verify_code_demo, name='verify_code_demo'),
+    path('get_check_code_image/', get_check_code_image, name='get_check_code_image'),
+    # path('pay_test/', pay_test, name='pay_test'),
     path('pay_for_tiantai_v2/', pay_for_tiantai_v2, name='pay_for_tiantai_v2'),
     path('pay_for_tiantai_v3/', pay_for_tiantai_v3, name='pay_for_tiantai_v3'),
     path('pay_for_tiantai_v4/', pay_for_tiantai_v4, name='pay_for_tiantai_v4'),
+    path('pay_for_tiantai_v5/', pay_for_tiantai_v5, name='pay_for_tiantai_v5'),
     path('set_pay_test_link/ablink/<str:op_code>', set_pay_test_link, name='set_pay_test_link'),
     path('get_pay_test_link_status/', get_pay_test_link_status, name='get_pay_test_link_status'),
     # django-celery demo course
